@@ -100,6 +100,7 @@ void print_string(Tstr output)
     }
 }
 
+/*letting args in - maybe in future I'll utilize them*/
 int main(int argc, char *argv[])
 {
     Tstr input = {.length = 0, .capacity = INCREMENT, .value = malloc(sizeof(int) * INCREMENT)};
