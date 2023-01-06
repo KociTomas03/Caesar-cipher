@@ -7,12 +7,21 @@
 #define INCREMENT 20
 #define SHIFT 3
 
+/*
+    In order to not face any troubles with input being to big I decided to have
+    the value to dynamically increase in size. Should be more acceptable for users.
+*/
 typedef struct
 {
     int length;
     int capacity;
     int *value;
 } Tstr;
+
+/*
+    Loads string from stdin,
+    @return true if we have loaded succesfully, false if we didn't manage to allocate enough memory
+*/
 
 bool load_string(Tstr *input)
 {
@@ -28,7 +37,6 @@ bool load_string(Tstr *input)
                 input->value = realloc(input->value, sizeof(int) * (input->capacity + INCREMENT));
                 if (input->value == NULL)
                 {
-                    printf("sike");
                     return false;
                 }
                 input->capacity += INCREMENT;
@@ -41,6 +49,9 @@ bool load_string(Tstr *input)
     return true;
 }
 
+/*
+    Transfers the msg to upper cahracters, just for the sake of convinience.
+*/
 void upperString(int *str)
 {
     int i = 0;
@@ -52,6 +63,9 @@ void upperString(int *str)
     return;
 }
 
+/*
+    Encrypts the msg via Ceasar Cipher
+*/
 void encrypt(Tstr *val)
 {
     upperString(val->value);
@@ -68,31 +82,27 @@ void encrypt(Tstr *val)
             {
                 val->value[i] = 'Z' + 1 + ((val->value[i] - 'A' - SHIFT) % 26);
             }
-            // printf("%d \n", 'A' + ((val->value[i] - 'A' - SHIFT) % 26));
         }
         i++;
     }
     return;
 }
 
+/*
+    Since Tstr holds information about its length there's no need to be checking
+    for '\0' in string.
+*/
 void print_string(Tstr output)
 {
     for (int i = 0; i < output.length; i++)
     {
         printf("%c", output.value[i]);
     }
-    /*int i = 0;
-    while (output.value[i] != '\0')
-    {
-        printf("%c", output.value[i]);
-        i++;
-    }*/
 }
 
 int main(int argc, char *argv[])
 {
     Tstr input = {.length = 0, .capacity = INCREMENT, .value = malloc(sizeof(int) * INCREMENT)};
-    int shift;
 
     if (load_string(&input))
     {
