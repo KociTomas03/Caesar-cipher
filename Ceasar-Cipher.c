@@ -1,3 +1,8 @@
+/*
+    Ceasar Cipher, where you don't have to care about your input being too long
+    author: Tomas Koci
+*/
+
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
@@ -8,7 +13,7 @@
 #define SHIFT 3
 
 /*
-    In order to not face any troubles with input being to big I decided to have
+    In order to not face any troubles with input being too big I decided to have
     the value to dynamically increase in size. Should be more acceptable for users.
 */
 typedef struct
@@ -20,7 +25,8 @@ typedef struct
 
 /*
     Loads string from stdin,
-    @return true if we have loaded succesfully, false if we didn't manage to allocate enough memory
+    returns true if we have loaded succesfully,
+    false if we didn't manage to allocate enough memory
 */
 
 bool load_string(Tstr *input)
