@@ -117,6 +117,7 @@ int main(int argc, char *argv[])
 
         print_string(input);
     }
+    free(input.value);
 
     return 0;
 }
